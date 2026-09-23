@@ -18,7 +18,7 @@ EXPECTED = [
     "index.html", "styles.css", "README.md", "AGENTS.md", "CITATION.bib",
     "favicon.svg", "site.webmanifest", ".nojekyll", "404.html", "robots.txt",
     "assets/paper/SUN.pdf", VIDEO, "assets/videos/poster.jpg",
-    "assets/figures/pipeline1.png",
+    "assets/figures/chase_sun.png", "assets/figures/pipeline1.png",
     *[f"assets/figures/{name}.{ext}" for name in
       ["sun_throughput", "sun_cost_parity", "sun_breakeven"] for ext in ["png", "pdf"]],
 ]
@@ -111,7 +111,8 @@ def main():
 
     for stale in ["MPC screening", "SkillMimic", "Skill Mimic", "Anonymous Authors",
                   "Under Review", "REPLACE-ME", "canonical L42", "45.97%", "34.72%",
-                  "SUNified", "GPT-6", "control-to-learning-to-real policies"]:
+                  "SUNified", "GPT-6", "control-to-learning-to-real policies",
+                  "readiness", "Appendix IV", "controller preparation"]:
         if stale.casefold() in html.casefold():
             errors.append(f"Stale terminology or metadata in page: {stale}")
     if f"<title>{TITLE}</title>" not in html:

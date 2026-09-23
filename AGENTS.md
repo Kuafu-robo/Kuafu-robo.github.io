@@ -28,10 +28,11 @@ Before editing, read README.md, index.html, styles.css, and scripts/validate.py.
 
 - Use project-owned figures unchanged, with meaningful alt text, captions, original aspect ratios, and full-resolution enlargement.
 - Do not redraw experimental plots or alter raster figure labels without specific approval.
-- The current main method figure is pipeline1.png. The older collage is deliberately excluded because its embedded terminology is stale.
+- Display the paper's Figure 1 (chase_sun.png) prominently below the publication links and before the abstract. Use the author's updated 2252×1567 PNG directly, including its MPC Verification label, in both the page and the lightbox; no text overlay is needed. The method workflow remains pipeline1.png. Do not regenerate or retouch the experimental imagery.
 - The only video is assets/videos/RAL_whole_long.mp4. The author approved a smaller full-length 1080p copy with the original audio. The source video and original ZIP remain outside this website, untouched.
 - The local paper PDF is the identified current arXiv version, including appendices.
-- Keep the page short: publication metadata, full video, method, results/plots, citation.
+- Keep the page focused: publication metadata and Figure 1, abstract, full video, method, results/plots, citation. The three data-generation plots include relevant passages from the paper, with their table-panel and section references.
+- Source the three plot descriptions from the main-text discussion in Section IV-C, not the appendix. Use the author's requested training terminology in the website descriptions and both break-even plots; preserve their reported data and calculations.
 - Display all result plots directly on the page; do not hide them behind expandable headings or disclosure controls.
 - Keep the workflow figure large at the full content width (1120px maximum), with its natural aspect ratio. Only the latter three data-generation plots use matching, centered display frames (900px maximum width, 1.8 aspect ratio), stacked vertically. Preserve plot proportions with object-fit: contain; do not crop or stretch the data.
 - Use a white academic layout, restrained blue, thin rules, real research figures, and native video controls.

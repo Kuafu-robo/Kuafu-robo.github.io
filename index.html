@@ -13,7 +13,7 @@
   <meta property="og:description" content="A persistent task program. An agent harness for robot policy learning. From language and object videos to policies for physical deployment.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="stylesheet" href="styles.css?v=20260923-figures-3">
+  <link rel="stylesheet" href="styles.css?v=20260923-author-figure1">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -42,6 +42,13 @@
         <a class="button" href="#video">Video</a>
         <a class="button" href="#citation">BibTeX</a><span class="release-note" id="code-status">Code coming soon</span>
       </div>
+      <figure class="hero-figure" id="overview">
+        <button type="button" class="figure-link" data-image="assets/figures/chase_sun.png?v=20260923-author" data-lightbox disabled aria-label="Enlarge Figure 1: SUN and Kuafu overview" data-caption="Figure 1. Coordinated by a persistent SUN Program, the Kuafu harness equips the agent with physics-based verification, policy learning, and data-production capabilities. The program supervises the simulation controller and its demonstrations; downstream visual policies learn from recorded observations and actions alone. We evaluate nine tasks and transfer visual policies for six of them to Franka FR3 and Kinova Gen3 robots.">
+          <img src="assets/figures/chase_sun.png?v=20260923-author" width="2252" height="1567" fetchpriority="high" decoding="async" alt="Figure 1 from the paper: a central SUN Program connects MPC verification, residual reinforcement learning, and zero-shot physical deployment, illustrated with stacking, emergency-stop, drawer, bottle, marker, and mug tasks.">
+          <span class="expand-hint" aria-hidden="true">Expand figure ↗</span>
+        </button>
+        <figcaption><strong>Figure 1.</strong> Coordinated by a persistent SUN Program, the Kuafu harness equips the agent with physics-based verification, policy learning, and data-production capabilities. The program supervises the simulation controller and its demonstrations; downstream visual policies learn from recorded observations and actions alone. We evaluate nine tasks and transfer visual policies for six of them to Franka FR3 and Kinova Gen3 robots.</figcaption>
+      </figure>
       <div class="abstract" aria-labelledby="abstract-heading">
         <h2 id="abstract-heading">Abstract</h2>
         <p>Model-based control can directly execute specified objectives, while learning can amortize such behaviors into reactive policies, making their combination a natural solution to multi-stage manipulation. We introduce Semantically UNified (SUN) Programs, typed executables that compile grounded relations into aligned optimal control objectives, satisfaction predicates, and learning rewards. Our harness, Kuafu, equips a foundation model as a task-level agent to orchestrate scene preparation, verification, residual RL, and data production. The agent uses program feedback to repair candidate programs and training diagnostics to calibrate relative reward weights, retaining accepted task semantics across tool calls. Across nine multi-stage manipulation tasks, Kuafu achieves 82.03% average success rate, significantly outperforming all learned baselines. Its learned controllers generate demonstrations at 10.57× the human-teleoperation rate, yielding data that improve visual-policy success by 23.6 percentage points over the strongest baseline. The policies transfer zero-shot to physical Franka and Kinova robots, demonstrating sim-to-real generalization.</p>
@@ -78,7 +85,7 @@
       <p class="section-lead">Evaluated on nine multistage manipulation tasks, with downstream visual-policy learning and zero-shot deployment on Franka and Kinova robots.</p>
       <div class="metrics">
         <article><h3>Simulation policy success</h3><p class="metric-value">82.03<span>%</span></p><p class="metric-description">Task-macro success of the primary privileged controller across nine tasks.</p></article>
-        <article><h3>Data-production throughput</h3><p class="metric-value">10.57<span>×</span></p><p class="metric-description">Human teleoperation’s successful trajectory time per active hour, once the controller is ready.</p></article>
+        <article><h3>Data-production throughput</h3><p class="metric-value">10.57<span>×</span></p><p class="metric-description">Successful trajectory time per active hour relative to human teleoperation, after controller training.</p></article>
         <article><h3>Downstream visual-policy gain</h3><p class="metric-value">+23.6<span> pp</span></p><p class="metric-description">Over SkillGen with the same DP3 learner and 500 successful trajectories per task.</p></article>
       </div>
       <p class="results-context">In the matched-data simulation study, DP3 reaches <strong>46.02%</strong> success with Kuafu demonstrations, versus <strong>22.44%</strong> with SkillGen. For physical deployment, DP3 trained on <strong>1,000 trajectories per task</strong> achieves <strong>34.0% success over 106 trials</strong> across six tasks and three robot–gripper configurations, without real-world fine-tuning.</p>
@@ -89,24 +96,32 @@
             <img src="assets/figures/sun_throughput.png" width="1584" height="759" loading="lazy" decoding="async" alt="Taskwise throughput plot comparing Kuafu, human teleoperation, MimicGen, SkillGen, Isaac Mimic, and Isaac SkillGen on a logarithmic scale; Kuafu has the highest rate on all nine tasks.">
             <span class="expand-hint" aria-hidden="true">Expand ↗</span>
           </button>
-          <figcaption>Successful trajectory minutes per active production hour. The throughput gain holds across all nine tasks.</figcaption>
+          <figcaption class="plot-discussion">
+            <p class="paper-source">From the paper · Table IV, panel A · Section IV-C</p>
+            <p>Human baselines were collected via simulation teleoperation using an AgileX PIKA gripper, with measured poses defining the simulated end-effector targets. Once the final state controller is trained, Kuafu produces 10.57× as much successful trajectory time per active production hour as human teleoperation.</p>
+          </figcaption>
         </figure>
         <figure>
-          <h3>Accounting for preparation cost</h3>
-          <button type="button" class="figure-link" data-image="assets/figures/sun_cost_parity.png" data-lightbox disabled aria-label="Enlarge the cost-parity analysis" data-caption="Modeled human and Kuafu costs at matched successful-demonstration counts, including controller preparation. The mean of the taskwise whole-demonstration parity thresholds is 35.22; the mean-cost curves cross at approximately 32.38, a different summary.">
-            <img src="assets/figures/sun_cost_parity.png" width="1584" height="836" loading="lazy" decoding="async" alt="Cost-parity analysis with human and Kuafu cost curves and per-task parity thresholds; the taskwise thresholds average 35.22 demonstrations, including controller preparation cost.">
+          <h3>Accounting for controller training cost</h3>
+          <button type="button" class="figure-link" data-image="assets/figures/sun_cost_parity.png?v=20260923-training" data-lightbox disabled aria-label="Enlarge the cost-parity analysis" data-caption="Including controller training, Kuafu reaches cost parity with human teleoperation after 35 successful demonstrations per task on average, at the hourly rates used in the paper.">
+            <img src="assets/figures/sun_cost_parity.png?v=20260923-training" width="1584" height="836" loading="lazy" decoding="async" alt="Cost-parity analysis with human and Kuafu cost curves and per-task parity thresholds; the taskwise thresholds average 35.22 demonstrations, including controller training cost.">
             <span class="expand-hint" aria-hidden="true">Expand ↗</span>
           </button>
-          <figcaption>Including controller preparation, cost parity averages <strong>35.22 demonstrations</strong> across tasks under the paper’s stated pricing assumptions.</figcaption>
+          <figcaption class="plot-discussion">
+            <p class="paper-source">From the paper · Table IV, panel B · Section IV-C</p>
+            <p>Pricing human teleoperation at the U.S. federal minimum wage of $7.25/h and A6000 rental for both controller training and data production at $0.51/GPU h, Kuafu reaches cost parity after 35 successful demonstrations per task on average.</p>
+          </figcaption>
         </figure>
       </div>
-      <p class="plot-note">Cost model: $7.25/hour for human teleoperation and $0.51/GPU-hour for preparation and collection. The mean preparation cost is $6.95. Cost parity and time break-even measure different quantities; see Appendix IV for the full analysis.</p>
       <figure class="break-even-figure">
-          <button type="button" class="figure-link" data-image="assets/figures/sun_breakeven.png" data-lightbox disabled aria-label="Enlarge cumulative data production and time break-even" data-caption="Including controller preparation, time break-even occurs at 225–854 successful demonstrations across tasks. The macro summary crosses at 513 demonstrations after 29.1 minutes of post-readiness collection.">
-            <img src="assets/figures/sun_breakeven.png" width="1584" height="770" loading="lazy" decoding="async" alt="Cumulative successful demonstration counts including controller preparation, showing time break-even below 1,000 demonstrations on all nine tasks.">
+          <button type="button" class="figure-link" data-image="assets/figures/sun_breakeven.png?v=20260923-training" data-lightbox disabled aria-label="Enlarge cumulative data production and time break-even" data-caption="Including controller training, Kuafu catches up with human teleoperation in cumulative successful demonstration count before reaching 1000 demonstrations on every task.">
+            <img src="assets/figures/sun_breakeven.png?v=20260923-training" width="1584" height="770" loading="lazy" decoding="async" alt="Cumulative successful demonstration counts including controller training, showing time break-even below 1,000 demonstrations on all nine tasks.">
             <span class="expand-hint" aria-hidden="true">Expand ↗</span>
           </button>
-          <figcaption>Time break-even occurs at 225–854 successful demonstrations across tasks. The macro crossover is 513 demonstrations after 29.1 minutes of post-readiness collection.</figcaption>
+          <figcaption class="plot-discussion">
+            <p class="paper-source">From the paper · Table IV, panel B · Section IV-C</p>
+            <p>Including controller training, Kuafu catches up with human teleoperation in cumulative successful demonstration count before reaching 1000 demonstrations on every task.</p>
+          </figcaption>
       </figure>
     </section>
     <section id="citation" class="content-section citation-section" aria-labelledby="citation-heading">

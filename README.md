@@ -2,7 +2,7 @@
 
 A concise project page for **SUN: Agentic Robot Policy Learning with Persistent Task Programs**, updated against the identified arXiv source at paper commit `9ca9469` (2026-09-23 website refresh).
 
-The page includes the paper's abstract, full project video, current method figure, throughput, cost-parity and time-break-even plots, and a copyable citation. All plots are displayed directly on the page. It has no download links. Supporting source assets remain in the folder, unlinked. The site requires no build tools or runtime dependencies.
+The page features the paper's Figure 1 below the title and publication links, followed by the abstract, full project video, method workflow, throughput, cost-parity and time-break-even plots, and a copyable citation. All plots are displayed directly on the page, with relevant passages from the main-text discussion of Table IV, panels A and B, in Section IV-C. The descriptions use the author's requested training terminology. It has no download links. Supporting source assets remain in the folder, unlinked. The site requires no build tools or runtime dependencies.
 
 ## Preview
 
@@ -70,11 +70,14 @@ Do not add any download links or controls. Figures enlarge on the page, citation
 
 ## Asset provenance
 
-All scientific assets come from the supplied project materials. Paper figures are byte-for-byte copies, not redrawn or relabeled.
+All scientific assets come from the supplied project materials. The cost-parity and time-break-even figures were regenerated from the paper's plotting script with the author's requested training terminology; their data, calculations, and layout are unchanged. Website assets are byte-for-byte copies of these current paper figures.
+
+Figure 1 uses the author's updated 2252×1567 PNG (2026-09-23), with **MPC Verification** already embedded in the artwork. It is displayed unchanged on the page and in the lightbox, without a text overlay or generative edits.
 
 | Website asset | Source |
 | --- | --- |
 | assets/paper/SUN.pdf | Compiled identified arXiv/main.tex and shared sections at 9ca9469 |
+| assets/figures/chase_sun.png | Paper figures/chase_sun.png (Figure 1, shown prominently above the abstract) |
 | assets/figures/pipeline1.png | Paper figures/pipeline1.png (main method figure) |
 | assets/figures/sun_throughput.png and .pdf | Paper Appendix IV throughput figure |
 | assets/figures/sun_cost_parity.png and .pdf | Paper Appendix IV cost-parity figure |
@@ -99,12 +102,12 @@ ffmpeg -nostdin -n -i /path/to/original/RAL_whole_long.mp4 \
 ## Result definitions
 
 - **82.03%**: primary privileged controller's task-macro success over nine tasks.
-- **10.57×**: task-macro successful trajectory minutes per active production hour relative to human teleoperation, after controller readiness.
+- **10.57×**: task-macro successful trajectory minutes per active production hour relative to human teleoperation, after controller training.
 - **+23.6 percentage points**: fixed-DP3 simulation, 500 successful demonstrations/task; Kuafu 46.02% versus SkillGen 22.44%.
 - **34.0% / 106 physical trials**: six tasks and three robot–gripper configurations, DP3 trained with 1,000 generated trajectories/task, without real-world fine-tuning.
-- **35.22 demonstrations**: mean taskwise whole-demonstration cost-parity threshold, including preparation. This differs from the approximately 32.38 intersection of mean-cost curves.
-- Cost assumptions: human teleoperation $7.25/hour; A6000 preparation and production $0.51/GPU-hour. Mean preparation cost $6.95.
-- **513 demonstrations / 29.1 minutes**: macro time-break-even summary, with collection time measured after readiness. This is distinct from monetary cost parity.
+- **35.22 demonstrations**: mean taskwise whole-demonstration cost-parity threshold, including controller training; rounded to 35 in the main-text discussion.
+- Cost assumptions: human teleoperation $7.25/hour; A6000 training and production $0.51/GPU-hour. Mean controller-training cost $6.95.
+- **513 demonstrations / 29.1 minutes**: macro time-break-even summary, with collection time measured after training. This is distinct from monetary cost parity.
 
 These are the paper's reported results and modeling assumptions, not new website experiments or current market-price quotations.
 

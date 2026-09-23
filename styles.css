@@ -50,6 +50,8 @@ h1 { max-width: 1060px; margin: 14px auto 23px; font-size: clamp(29px, 3.5vw, 44
 .button[aria-disabled="true"] { color: var(--muted); background: var(--soft); cursor: default; }
 .button[aria-disabled="true"]:hover { border-color: #c8d5e1; }
 .release-note { padding: 8px 9px; color: var(--muted); font-size: 12px; }
+.hero-figure { max-width: 1000px; margin: 30px auto 0; text-align: left; }
+.hero-figure figcaption { font-size: 13px; line-height: 1.7; }
 .abstract { max-width: 960px; margin: 30px auto 0; text-align: left; }
 .abstract h2 { margin-bottom: 14px; font-size: 24px; text-align: center; }
 .abstract p { font-size: 16px; line-height: 1.75; }
@@ -90,7 +92,9 @@ figcaption { color: var(--muted); font-size: 12px; line-height: 1.65; margin-top
 .plots h3 { font-size: 16px; margin-bottom: 14px; }
 .plots .figure-link, .break-even-figure .figure-link { aspect-ratio: 1.8; display: flex; align-items: center; }
 .plots .figure-link img, .break-even-figure .figure-link img { height: 100%; object-fit: contain; }
-.plot-note { max-width: 900px; color: var(--muted); font-size: 11px; margin: 19px auto 0; }
+.plot-discussion { font-size: 14px; line-height: 1.75; }
+.plot-discussion p + p { margin-top: 12px; }
+.plot-discussion .paper-source { color: var(--blue); font-size: 11px; font-weight: 600; }
 .break-even-figure { max-width: 900px; margin: 28px auto 0; }
 .citation-section { padding-bottom: 28px; border-bottom: 0; }
 .citation-heading, .citation-heading > div { display: flex; align-items: center; gap: 18px; }
@@ -132,6 +136,8 @@ dialog::backdrop { background: rgb(10 22 35 / 80%); }
   .resource-links { gap: 8px; margin-block: 18px 19px; }
   .button { min-height: 41px; padding: 8px 11px; font-size: 12px; }
   .release-note { flex-basis: 100%; padding: 0; font-size: 11px; }
+  .hero-figure { margin-top: 24px; }
+  .hero-figure figcaption { font-size: 11px; }
   .abstract p { font-size: 14px; }
   .media-heading > span { font-size: 10px; }
   .media-caption { font-size: 11px; }
@@ -152,6 +158,7 @@ dialog::backdrop { background: rgb(10 22 35 / 80%); }
   .results-context { font-size: 13px; }
   .plots { gap: 28px; margin-top: 26px; }
   .plots h3 { font-size: 15px; }
+  .plot-discussion { font-size: 13px; }
   .citation-heading, .citation-heading > div { gap: 12px; }
   .citation-heading h2 { font-size: 22px; }
   pre { padding: 15px; font-size: 11px; }
