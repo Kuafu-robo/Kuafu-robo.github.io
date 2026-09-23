@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="color-scheme" content="light">
+  <title>SUN: Agentic Robot Policy Learning with Persistent Task Programs</title>
+  <meta name="description" content="SUN Programs preserve executable task semantics across control and learning. The Kuafu harness equips an agent to turn language instructions and object videos into robot policies.">
+  <meta name="author" content="Weiqi Wang, Zhi Li, Yudong Lei, David Martinez, Xiaofeng Gao, Yuxin Jiang, Chenfanfu Jiang, Yingnian Wu, Demetri Terzopoulos, Ran Gong">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SUN: Agentic Robot Policy Learning with Persistent Task Programs">
+  <meta property="og:description" content="A persistent task program. An agent harness for robot policy learning. From language and object videos to policies for physical deployment.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="stylesheet" href="styles.css?v=20260923-figures-3">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="#main" aria-label="SUN project home">SUN<span> / Kuafu</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#video">Video</a><a href="#method">Method</a><a href="#results">Results</a>
+        <span class="nav-resource" data-resource="arxiv" aria-disabled="true" title="Public arXiv page link pending">arXiv</span>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="container" tabindex="-1">
+    <section class="hero" aria-labelledby="paper-title">
+      <p class="eyebrow" id="publication">Research preprint · 2026</p>
+      <h1 id="paper-title"><span class="title-accent">SUN:</span> Agentic Robot Policy Learning<br class="desktop-break"> with Persistent Task Programs</h1>
+      <div class="authors" id="authors">
+        <span>Weiqi Wang<sup>1,*</sup></span><span>Zhi Li<sup>1,*</sup></span><span>Yudong Lei<sup>2</sup></span><span>David Martinez<sup>1</sup></span><span>Xiaofeng Gao<sup>3,‡</sup></span><span>Yuxin Jiang<sup>1</sup></span><span>Chenfanfu Jiang<sup>1</sup></span><span>Yingnian Wu<sup>1,†</sup></span><span>Demetri Terzopoulos<sup>1,†</sup></span><span>Ran Gong<sup>4,†</sup></span>
+      </div>
+      <div class="affiliations" id="affiliations">
+        <span><sup>1</sup> University of California, Los Angeles</span><span><sup>2</sup> Carnegie Mellon University</span><span><sup>3</sup> Amazon</span><span><sup>4</sup> Robotics and AI Institute</span>
+      </div>
+      <p class="author-notes" id="author-notes">* Equal contribution · † Corresponding author<br>‡ This work does not relate to the author’s position at Amazon.</p>
+      <div class="resource-links">
+        <span class="button" data-resource="arxiv" aria-disabled="true" title="Public arXiv page link pending">arXiv</span>
+        <a class="button" href="#video">Video</a>
+        <a class="button" href="#citation">BibTeX</a><span class="release-note" id="code-status">Code coming soon</span>
+      </div>
+      <div class="abstract" aria-labelledby="abstract-heading">
+        <h2 id="abstract-heading">Abstract</h2>
+        <p>Model-based control can directly execute specified objectives, while learning can amortize such behaviors into reactive policies, making their combination a natural solution to multi-stage manipulation. We introduce Semantically UNified (SUN) Programs, typed executables that compile grounded relations into aligned optimal control objectives, satisfaction predicates, and learning rewards. Our harness, Kuafu, equips a foundation model as a task-level agent to orchestrate scene preparation, verification, residual RL, and data production. The agent uses program feedback to repair candidate programs and training diagnostics to calibrate relative reward weights, retaining accepted task semantics across tool calls. Across nine multi-stage manipulation tasks, Kuafu achieves 82.03% average success rate, significantly outperforming all learned baselines. Its learned controllers generate demonstrations at 10.57× the human-teleoperation rate, yielding data that improve visual-policy success by 23.6 percentage points over the strongest baseline. The policies transfer zero-shot to physical Franka and Kinova robots, demonstrating sim-to-real generalization.</p>
+      </div>
+    </section>
+    <section id="video" class="video-section" aria-label="Project video">
+      <div class="media-heading"><span>Full project video · 2:11</span></div>
+      <video id="project-video" width="1920" height="1080" controls controlslist="nodownload" muted playsinline preload="metadata" poster="assets/videos/poster.jpg" aria-label="Complete SUN and Kuafu project demonstration video" aria-describedby="video-caption">
+        <source src="assets/videos/RAL_whole_long.mp4" type="video/mp4">
+        Your browser does not support embedded video.
+      </video>
+      <p class="media-caption" id="video-caption">Program-guided manipulation in simulation and deployment on physical robots. Audio is available through the player controls.</p>
+    </section>
+    <section id="method" class="content-section" aria-labelledby="method-heading">
+      <div class="section-heading"><span class="section-number" aria-hidden="true">01</span><div><h2 id="method-heading">One program, across control and learning.</h2></div></div>
+      <div class="contributions">
+        <article><h3>SUN · the task program</h3><p>A Semantically UNified (SUN) Program compiles grounded relations into aligned <strong>MPC objective terms, satisfaction predicates, and RL learning costs</strong>. The accepted relations keep their identity, grounding, satisfaction boundaries, and stage membership across tool calls.</p></article>
+        <article><h3>Kuafu · the agent harness</h3><p>A robotics execution and learning harness equips a task-level agent to prepare scenes, verify and repair programs, and acquire policies. Physical feedback guides program repair; training diagnostics guide scalar calibration within the accepted task definition.</p></article>
+      </div>
+      <figure class="pipeline-figure">
+        <button type="button" class="figure-link" data-image="assets/figures/pipeline1.png" data-lightbox disabled aria-label="Enlarge the Kuafu method figure" data-caption="The Kuafu harness: an agent uses physical and training feedback around a persistent SUN Program. Controllers execute the individual control steps.">
+          <img src="assets/figures/pipeline1.png" width="2617" height="1169" loading="lazy" decoding="async" alt="Kuafu method: SUN Program formation and MPC verification with feedback for repair; successful rollouts support behavior cloning and bounded residual reinforcement learning, followed by data production and physical deployment.">
+          <span class="expand-hint" aria-hidden="true">Expand figure ↗</span>
+        </button>
+        <figcaption>MPC verification supplies successful demonstrations for Stage-BC. A frozen behavioral prior anchors bounded residual RL, while the agent uses training feedback to calibrate permitted scalars. The resulting simulation controller produces demonstrations for a visual policy.</figcaption>
+      </figure>
+      <div class="handoff">
+        <p><span class="detail-label">Inputs</span> Language instructions and object videos, together with a robot model, simulation configuration, and typed operator library.</p>
+        <p><span class="detail-label">Outputs</span> A simulation policy for data production and a visual policy for physical deployment. The visual learner receives recorded observations and actions alone.</p>
+      </div>
+    </section>
+    <section id="results" class="content-section" aria-labelledby="results-heading">
+      <div class="section-heading"><span class="section-number" aria-hidden="true">02</span><div><p class="eyebrow">Data Generation</p><h2 id="results-heading">From learned behavior to useful robot data.</h2></div></div>
+      <p class="section-lead">Evaluated on nine multistage manipulation tasks, with downstream visual-policy learning and zero-shot deployment on Franka and Kinova robots.</p>
+      <div class="metrics">
+        <article><h3>Simulation policy success</h3><p class="metric-value">82.03<span>%</span></p><p class="metric-description">Task-macro success of the primary privileged controller across nine tasks.</p></article>
+        <article><h3>Data-production throughput</h3><p class="metric-value">10.57<span>×</span></p><p class="metric-description">Human teleoperation’s successful trajectory time per active hour, once the controller is ready.</p></article>
+        <article><h3>Downstream visual-policy gain</h3><p class="metric-value">+23.6<span> pp</span></p><p class="metric-description">Over SkillGen with the same DP3 learner and 500 successful trajectories per task.</p></article>
+      </div>
+      <p class="results-context">In the matched-data simulation study, DP3 reaches <strong>46.02%</strong> success with Kuafu demonstrations, versus <strong>22.44%</strong> with SkillGen. For physical deployment, DP3 trained on <strong>1,000 trajectories per task</strong> achieves <strong>34.0% success over 106 trials</strong> across six tasks and three robot–gripper configurations, without real-world fine-tuning.</p>
+      <div class="plots">
+        <figure>
+          <h3>More data per production hour</h3>
+          <button type="button" class="figure-link" data-image="assets/figures/sun_throughput.png" data-lightbox disabled aria-label="Enlarge taskwise data-production throughput" data-caption="Successful trajectory minutes per active production hour. The logarithmic axis compares human collection with simulated generators across T0–T8 and the task-macro average.">
+            <img src="assets/figures/sun_throughput.png" width="1584" height="759" loading="lazy" decoding="async" alt="Taskwise throughput plot comparing Kuafu, human teleoperation, MimicGen, SkillGen, Isaac Mimic, and Isaac SkillGen on a logarithmic scale; Kuafu has the highest rate on all nine tasks.">
+            <span class="expand-hint" aria-hidden="true">Expand ↗</span>
+          </button>
+          <figcaption>Successful trajectory minutes per active production hour. The throughput gain holds across all nine tasks.</figcaption>
+        </figure>
+        <figure>
+          <h3>Accounting for preparation cost</h3>
+          <button type="button" class="figure-link" data-image="assets/figures/sun_cost_parity.png" data-lightbox disabled aria-label="Enlarge the cost-parity analysis" data-caption="Modeled human and Kuafu costs at matched successful-demonstration counts, including controller preparation. The mean of the taskwise whole-demonstration parity thresholds is 35.22; the mean-cost curves cross at approximately 32.38, a different summary.">
+            <img src="assets/figures/sun_cost_parity.png" width="1584" height="836" loading="lazy" decoding="async" alt="Cost-parity analysis with human and Kuafu cost curves and per-task parity thresholds; the taskwise thresholds average 35.22 demonstrations, including controller preparation cost.">
+            <span class="expand-hint" aria-hidden="true">Expand ↗</span>
+          </button>
+          <figcaption>Including controller preparation, cost parity averages <strong>35.22 demonstrations</strong> across tasks under the paper’s stated pricing assumptions.</figcaption>
+        </figure>
+      </div>
+      <p class="plot-note">Cost model: $7.25/hour for human teleoperation and $0.51/GPU-hour for preparation and collection. The mean preparation cost is $6.95. Cost parity and time break-even measure different quantities; see Appendix IV for the full analysis.</p>
+      <figure class="break-even-figure">
+          <button type="button" class="figure-link" data-image="assets/figures/sun_breakeven.png" data-lightbox disabled aria-label="Enlarge cumulative data production and time break-even" data-caption="Including controller preparation, time break-even occurs at 225–854 successful demonstrations across tasks. The macro summary crosses at 513 demonstrations after 29.1 minutes of post-readiness collection.">
+            <img src="assets/figures/sun_breakeven.png" width="1584" height="770" loading="lazy" decoding="async" alt="Cumulative successful demonstration counts including controller preparation, showing time break-even below 1,000 demonstrations on all nine tasks.">
+            <span class="expand-hint" aria-hidden="true">Expand ↗</span>
+          </button>
+          <figcaption>Time break-even occurs at 225–854 successful demonstrations across tasks. The macro crossover is 513 demonstrations after 29.1 minutes of post-readiness collection.</figcaption>
+      </figure>
+    </section>
+    <section id="citation" class="content-section citation-section" aria-labelledby="citation-heading">
+      <div class="citation-heading"><h2 id="citation-heading">Citation</h2><button type="button" id="copy-citation" hidden>Copy BibTeX</button></div>
+      <pre tabindex="0" aria-label="BibTeX citation"><code id="bibtex">@misc{wang2026sun,
+  title = {{SUN}: Agentic Robot Policy Learning with Persistent Task Programs},
+  author = {Wang, Weiqi and Li, Zhi and Lei, Yudong and Martinez, David and
+            Gao, Xiaofeng and Jiang, Yuxin and Jiang, Chenfanfu and Wu, Yingnian and
+            Terzopoulos, Demetri and Gong, Ran},
+  year = {2026},
+  note = {Preprint}
+}</code></pre>
+      <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container"><span><strong>SUN</strong> Programs · <strong>Kuafu</strong> harness</span><a href="#main">Back to top ↑</a></div></footer>
+  <dialog id="figure-dialog" aria-labelledby="dialog-caption">
+    <div class="dialog-toolbar"><span>Paper figure</span><button id="close-figure" type="button" aria-label="Close enlarged figure">Close ×</button></div>
+    <img id="dialog-image" alt=""><p id="dialog-caption"></p>
+  </dialog>
+  <script>
+    'use strict';
+    // Publication data follows the identified arXiv manuscript; no public identifier is assumed.
+    const site = {
+      title: 'SUN: Agentic Robot Policy Learning with Persistent Task Programs',
+      publication: 'Research preprint · 2026',
+      authors: [
+        {name: 'Weiqi Wang', marks: '1,*'}, {name: 'Zhi Li', marks: '1,*'},
+        {name: 'Yudong Lei', marks: '2'}, {name: 'David Martinez', marks: '1'},
+        {name: 'Xiaofeng Gao', marks: '3,‡'}, {name: 'Yuxin Jiang', marks: '1'},
+        {name: 'Chenfanfu Jiang', marks: '1'}, {name: 'Yingnian Wu', marks: '1,†'},
+        {name: 'Demetri Terzopoulos', marks: '1,†'}, {name: 'Ran Gong', marks: '4,†'}
+      ],
+      affiliations: ['University of California, Los Angeles', 'Carnegie Mellon University', 'Amazon', 'Robotics and AI Institute'],
+      authorNotes: ['* Equal contribution · † Corresponding author', '‡ This work does not relate to the author’s position at Amazon.'],
+      resources: {arxiv: null, code: null},
+      bibtex: `@misc{wang2026sun,
+  title = {{SUN}: Agentic Robot Policy Learning with Persistent Task Programs},
+  author = {Wang, Weiqi and Li, Zhi and Lei, Yudong and Martinez, David and
+            Gao, Xiaofeng and Jiang, Yuxin and Jiang, Chenfanfu and Wu, Yingnian and
+            Terzopoulos, Demetri and Gong, Ran},
+  year = {2026},
+  note = {Preprint}
+}`
+    };
+    document.title = site.title;
+    document.querySelector('meta[property="og:title"]').content = site.title;
+    document.querySelector('meta[name="author"]').content = site.authors.map(author => author.name).join(', ');
+    document.getElementById('publication').textContent = site.publication;
+    document.getElementById('authors').replaceChildren(...site.authors.map(author => {
+      const span = document.createElement('span');
+      span.textContent = author.name;
+      const sup = document.createElement('sup');
+      sup.textContent = author.marks;
+      span.append(sup);
+      return span;
+    }));
+    document.getElementById('affiliations').replaceChildren(...site.affiliations.map((name, index) => {
+      const span = document.createElement('span');
+      const sup = document.createElement('sup');
+      sup.textContent = index + 1;
+      span.append(sup, document.createTextNode(' ' + name));
+      return span;
+    }));
+    const notes = document.getElementById('author-notes');
+    notes.replaceChildren();
+    site.authorNotes.forEach((note, index) => {
+      if (index) notes.append(document.createElement('br'));
+      notes.append(document.createTextNode(note));
+    });
+    if (site.resources.arxiv && site.resources.arxiv.startsWith('https://arxiv.org/abs/')) {
+      document.querySelectorAll('[data-resource="arxiv"]').forEach(label => {
+        const link = document.createElement('a');
+        link.className = label.className;
+        link.textContent = label.textContent;
+        link.href = site.resources.arxiv;
+        label.replaceWith(link);
+      });
+    }
+    if (site.resources.code) {
+      const link = document.createElement('a');
+      link.href = site.resources.code;
+      link.className = 'button';
+      link.textContent = 'Source code ↗';
+      document.getElementById('code-status').replaceWith(link);
+    }
+    document.getElementById('bibtex').textContent = site.bibtex;
+    // Figures stay on the page; buttons add enlargement without exposing file links.
+    const dialog = document.getElementById('figure-dialog');
+    let figureTrigger;
+    if (typeof dialog.showModal === 'function') {
+      document.querySelectorAll('[data-lightbox]').forEach(button => {
+        button.disabled = false;
+        button.addEventListener('click', () => {
+          figureTrigger = button;
+          const target = document.getElementById('dialog-image');
+          target.src = button.dataset.image;
+          target.alt = button.querySelector('img').alt;
+          document.getElementById('dialog-caption').textContent = button.dataset.caption;
+          dialog.showModal();
+          document.body.classList.add('modal-open');
+          document.getElementById('close-figure').focus();
+        });
+      });
+      document.getElementById('close-figure').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', event => {
+        const r = dialog.getBoundingClientRect();
+        if (event.target === dialog && (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom)) dialog.close();
+      });
+      dialog.addEventListener('close', () => {
+        document.body.classList.remove('modal-open');
+        if (figureTrigger) figureTrigger.focus({preventScroll: true});
+      });
+    }
+    const copyButton = document.getElementById('copy-citation');
+    copyButton.hidden = false;
+    copyButton.addEventListener('click', async () => {
+      const status = document.getElementById('copy-status');
+      try {
+        if (!navigator.clipboard) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(site.bibtex);
+        status.textContent = 'Citation copied.';
+      } catch (error) {
+        const range = document.createRange();
+        range.selectNodeContents(document.getElementById('bibtex'));
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        status.textContent = 'Citation selected. Use your browser’s Copy command.';
+      }
+    });
+    // Muted inline autoplay when visible; respect reduced-motion preferences.
+    const video = document.getElementById('project-video');
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!motionPreference.matches && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) {
+          video.play().catch(() => {});
+          observer.disconnect();
+        }
+      }, {threshold: 0.35});
+      observer.observe(video);
+    }
+    motionPreference.addEventListener('change', event => { if (event.matches) video.pause(); });
+    if ('IntersectionObserver' in window) {
+      const links = Array.from(document.querySelectorAll('nav a[href^="#"]'));
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          links.forEach(link => {
+            if (link.hash === '#' + entry.target.id) link.setAttribute('aria-current', 'location');
+            else link.removeAttribute('aria-current');
+          });
+        });
+      }, {rootMargin: '-10% 0px -65% 0px'});
+      links.forEach(link => observer.observe(document.querySelector(link.hash)));
+      observer.observe(document.querySelector('.hero'));
+    }
+  </script>
+</body>
+</html>
