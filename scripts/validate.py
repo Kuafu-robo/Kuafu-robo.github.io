@@ -14,10 +14,16 @@ ROOT = Path(__file__).resolve().parents[1]
 TITLE = "SUN: Agentic Robot Policy Learning with Persistent Task Programs"
 LIMIT = 100 * 1024 * 1024
 VIDEO = "assets/videos/RAL_whole_long.mp4"
+EXAMPLE_IDS = ("0024", "0026", "0028", "0029")
+EXAMPLE_VIDEOS = [f"assets/visual-models/{key}/{kind}.mp4"
+                  for key in EXAMPLE_IDS for kind in ("input", "model")]
 EXPECTED = [
     "index.html", "styles.css", "README.md", "AGENTS.md", "CITATION.bib",
     "favicon.svg", "site.webmanifest", ".nojekyll", "404.html", "robots.txt",
     "assets/paper/SUN.pdf", VIDEO, "assets/videos/poster.jpg",
+    "assets/visual-models/manifest.json", *EXAMPLE_VIDEOS,
+    *[f"assets/visual-models/{key}/{kind}.jpg"
+      for key in EXAMPLE_IDS for kind in ("input", "model")],
     "assets/figures/chase_sun.png", "assets/figures/pipeline1.png",
     *[f"assets/figures/{name}.{ext}" for name in
       ["sun_throughput", "sun_cost_parity", "sun_breakeven"] for ext in ["png", "pdf"]],
@@ -58,7 +64,7 @@ class Page(HTMLParser):
             self.issues.append("A new-tab link lacks rel=noopener.")
         if "download" in a:
             self.issues.append("Download controls are prohibited on this website.")
-        if tag == "a" and re.search(r"\.(?:pdf|bib|png|jpe?g|svg|mp4|zip)(?:[?#]|$)", a.get("href", ""), re.I):
+        if tag == "a" and re.search(r"\.(?:pdf|bib|png|jpe?g|svg|mp4|mov|glb|gltf|obj|usda?|zip)(?:[?#]|$)", a.get("href", ""), re.I):
             self.issues.append("Direct file links are prohibited on this website.")
 
     handle_startendtag = handle_starttag
@@ -96,18 +102,24 @@ def main():
                 errors.append(f"Broken local link: {path}")
     if len(page.scripts) != 1:
         errors.append("Expected exactly one inline script.")
-    if len(page.videos) != 1 or len(page.sources) != 1:
-        errors.append("Expected exactly one video and one source.")
-    elif page.sources[0].get("src") != VIDEO:
-        errors.append("The video source is not the approved full-length web copy.")
+    approved_videos = [VIDEO, *EXAMPLE_VIDEOS]
+    if len(page.videos) != len(approved_videos):
+        errors.append("Expected the full project video and four video/model pairs.")
+    if Counter(attrs.get("src") for attrs in page.sources) != Counter(approved_videos):
+        errors.append("Video sources do not match the approved project and object clips.")
     for attrs in page.videos:
         if "nodownload" not in attrs.get("controlslist", "").split():
             errors.append("Video must suppress the native download control where supported.")
         for required in ["controls", "muted", "playsinline"]:
             if required not in attrs:
                 errors.append(f"Video is missing {required}.")
-    if sorted(str(p.relative_to(ROOT)) for p in ROOT.rglob("*.mp4")) != [VIDEO]:
-        errors.append("Unexpected additional MP4 file.")
+    if sorted(str(p.relative_to(ROOT)) for p in ROOT.rglob("*.mp4")) != sorted(approved_videos):
+        errors.append("Unexpected or missing MP4 file.")
+    try:
+        if not page.ids.index("method") < page.ids.index("asset-examples") < page.ids.index("results"):
+            errors.append("Object examples must appear between the method and data generation.")
+    except ValueError:
+        errors.append("A required method, object-example, or results section is missing.")
 
     for stale in ["MPC screening", "SkillMimic", "Skill Mimic", "Anonymous Authors",
                   "Under Review", "REPLACE-ME", "canonical L42", "45.97%", "34.72%",
@@ -140,7 +152,7 @@ def main():
         return 1
     total = sum(path.stat().st_size for path in files)
     print(f"[PASS] {len(files)} files; {total / 1024**2:.1f} MiB total.")
-    print("[PASS] Local links, anchors, metadata, citation, figures, and one full video.")
+    print("[PASS] Local links, anchors, metadata, citation, figures, full video, and four object examples.")
     print("[PASS] All files below 100 MiB; no stale page terminology or placeholders.")
     return 0
 

@@ -2,7 +2,7 @@
 
 A concise project page for **SUN: Agentic Robot Policy Learning with Persistent Task Programs**, updated against the identified arXiv source at paper commit `9ca9469` (2026-09-23 website refresh).
 
-The page features the paper's Figure 1 below the title and publication links, followed by the abstract, full project video, method workflow, throughput, cost-parity and time-break-even plots, and a copyable citation. All plots are displayed directly on the page, with relevant passages from the main-text discussion of Table IV, panels A and B, in Section IV-C. The descriptions use the author's requested training terminology. It has no download links. Supporting source assets remain in the folder, unlinked. The site requires no build tools or runtime dependencies.
+The page features the paper's Figure 1 below the title and publication links, followed by the abstract, full project video, method workflow, four video-to-model examples, throughput, cost-parity and time-break-even plots, and a copyable citation. All plots are displayed directly on the page, with relevant passages from the main-text discussion of Table IV, panels A and B, in Section IV-C. The descriptions use the author's requested training terminology. It has no download links. Supporting source assets remain in the folder, unlinked. The site requires no build tools or runtime dependencies.
 
 ## Preview
 
@@ -59,8 +59,9 @@ Official instructions: [Creating a Pages site](https://docs.github.com/en/pages/
 - **index.html**: narrative, publication data in the inline `site` object, navigation, lightbox, and citation-copy behavior. Keep static metadata/fallback text and CITATION.bib synchronized with the object.
 - **styles.css**: responsive layout and academic styling.
 - **assets/paper/SUN.pdf**: current identified arXiv manuscript, including appendices.
-- **assets/videos/RAL_whole_long.mp4**: the only project video; complete 1080p web copy.
+- **assets/videos/RAL_whole_long.mp4**: the complete 1080p project video.
 - **assets/videos/poster.jpg**: an unaltered frame extracted at 12 seconds from the supplied full video.
+- **assets/visual-models/**: four author-supplied source clips paired with textured-model turntables, their posters, and a provenance manifest. The example selector shows one pair at a time; all pairs remain visible without JavaScript.
 - **assets/figures/**: original current-paper figures; PNGs for in-page display, with vector PDFs retained as unlinked source assets.
 - **scripts/validate.py**: dependency-free file, link, terminology, and citation checks.
 
@@ -84,8 +85,15 @@ Figure 1 uses the author's updated 2252×1567 PNG (2026-09-23), with **MPC Verif
 | assets/figures/sun_breakeven.png and .pdf | Paper Appendix IV time-break-even figure |
 | assets/videos/RAL_whole_long.mp4 | Author-provided RAL_whole_long.mp4; approved full-length web encode |
 | assets/videos/poster.jpg | Frame from the same author-provided video |
+| assets/visual-models/ID/input.mp4 | Full-length 720×1280 web encode of kuafu_visual/video2assets/IMG_ID.mov, preserving frame count and audio |
+| assets/visual-models/ID/input.jpg | Unchanged runs/ID/frames/frame_000.jpg from the same object recording |
+| assets/visual-models/ID/model.mp4 and model.jpg | Unchanged runs/ID/turntable/turntable.mp4 and poster.jpg, rendered from the supplied photo-textured GLB |
 
 The original website archive and original full-quality video are preserved outside this folder. Older website PDFs, figures, and video clips are not included in the rebuilt package.
+
+The four video-to-model examples come from kuafu_visual commit `35f3e0e`: `0024` emergency-stop box, `0026` sage holder, `0028` bamboo organizer, and `0029` bamboo tray. Their model clips are eight-second, 720×720, 360° previews of the actual supplied photo-textured assets. They illustrate the visual-to-model component; they are not new experiments or accuracy measurements. Only the displayed clips and posters are copied into the website, not the original MOVs, GLBs, or ZIP packages.
+
+`scripts/prepare_visual_examples.py /path/to/kuafu_visual` reproduces the web assets in a new/nonexistent assets/visual-models directory. It verifies upstream video/model hashes, preserves all source frames (158, 139, 194, and 151 respectively) and original AAC audio, and copies the turntables/posters unchanged. It requires FFmpeg/ffprobe and Python 3.11+, refuses to overwrite an existing output directory, and records file hashes and encoding details in the manifest. The original clips and model files are never modified.
 
 The video retains all **3,928 frames**, at **1920×1080, 30 fps**, and its AAC audio is copied without re-encoding. It runs approximately **2 minutes 11 seconds**. MP4 container duration differs by about 0.03 seconds because of remuxed timing; no scene was cut. Web encoding uses H.264, CRF 23, maximum rate 4,600 kb/s, and fast-start metadata.
 

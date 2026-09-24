@@ -78,6 +78,17 @@ h2 { font-size: clamp(25px, 2.5vw, 31px); letter-spacing: -.025em; text-wrap: ba
 figcaption { color: var(--muted); font-size: 12px; line-height: 1.65; margin-top: 12px; }
 .handoff { display: grid; grid-template-columns: 1fr 1.15fr; gap: 32px; margin-top: 22px; padding: 19px 22px; background: var(--soft); border-left: 2px solid #7b9bb8; font-size: 13px; color: var(--muted); }
 .detail-label { display: block; margin-bottom: 3px; color: var(--ink); font-size: 12px; font-weight: 700; }
+.asset-gallery { max-width: 900px; margin: 26px auto 0; }
+.example-picker { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 23px; }
+.example-picker button { border: 1px solid var(--line); border-radius: 5px; padding: 9px 15px; background: #fff; color: var(--muted); font-size: 13px; font-weight: 550; min-height: 42px; }
+.example-picker button:hover { border-color: var(--blue); color: var(--blue); }
+.example-picker button[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.asset-example + .asset-example { margin-top: 30px; }
+.example-picker:not([hidden]) ~ .asset-example { margin-top: 0; }
+.asset-example h3 { font-size: 17px; margin-bottom: 15px; }
+.example-media { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+.example-media figcaption { margin: 0 0 9px; font-size: 12px; font-weight: 600; }
+.example-media video { aspect-ratio: 1; object-fit: contain; background: #eef2f7; border: 1px solid var(--line); }
 .metrics { display: grid; grid-template-columns: repeat(3, 1fr); margin: 27px 0 23px; padding-block: 25px 21px; border-block: 1px solid var(--line); }
 .metrics > article { padding: 0 28px; border-right: 1px solid var(--line); }
 .metrics > article:first-child { padding-left: 0; }
@@ -149,6 +160,9 @@ dialog::backdrop { background: rgb(10 22 35 / 80%); }
   .expand-hint { opacity: 1; font-size: 10px; right: 4px; bottom: 4px; }
   figcaption { font-size: 11px; }
   .handoff { grid-template-columns: 1fr; gap: 13px; padding: 16px; font-size: 12px; }
+  .example-picker { gap: 8px; margin-bottom: 20px; }
+  .example-picker button { padding: 8px 12px; font-size: 12px; }
+  .example-media { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .metrics { grid-template-columns: 1fr; gap: 0; margin-block: 22px; padding-block: 0; }
   .metrics > article, .metrics > article:first-child, .metrics > article:last-child { display: grid; grid-template-columns: 116px 1fr; column-gap: 15px; padding: 17px 0; border: 0; border-bottom: 1px solid var(--line); }
   .metrics > article:last-child { border-bottom: 0; }

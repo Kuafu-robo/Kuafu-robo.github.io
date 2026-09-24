@@ -13,7 +13,7 @@
   <meta property="og:description" content="A persistent task program. An agent harness for robot policy learning. From language and object videos to policies for physical deployment.">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="stylesheet" href="styles.css?v=20260923-author-figure1">
+  <link rel="stylesheet" href="styles.css?v=20260923-visual-models">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -80,8 +80,80 @@
         <p><span class="detail-label">Outputs</span> A simulation policy for data production and a visual policy for physical deployment. The visual learner receives recorded observations and actions alone.</p>
       </div>
     </section>
+    <section id="asset-examples" class="content-section" aria-labelledby="asset-examples-heading">
+      <div class="section-heading"><span class="section-number" aria-hidden="true">02</span><div><h2 id="asset-examples-heading">From object videos to simulation assets.</h2></div></div>
+      <p class="section-lead">The agent uses object videos and language descriptions to construct textured models for simulation. Compare the source clips with 360° views of the resulting assets.</p>
+      <div class="asset-gallery">
+        <div class="example-picker" role="group" aria-label="Choose an object" hidden>
+          <button type="button" data-example="0026" aria-controls="example-0026" aria-pressed="true">Holder</button>
+          <button type="button" data-example="0024" aria-controls="example-0024" aria-pressed="false">Emergency-stop box</button>
+          <button type="button" data-example="0028" aria-controls="example-0028" aria-pressed="false">Organizer</button>
+          <button type="button" data-example="0029" aria-controls="example-0029" aria-pressed="false">Tray</button>
+        </div>
+        <article class="asset-example" id="example-0026" aria-labelledby="example-0026-heading">
+          <h3 id="example-0026-heading">Sage holder</h3>
+          <div class="example-media">
+            <figure><figcaption>Input video</figcaption>
+              <video width="720" height="1280" controls controlslist="nodownload" muted loop playsinline preload="none" poster="assets/visual-models/0026/input.jpg" aria-label="Source video of the sage holder">
+                <source src="assets/visual-models/0026/input.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure><figcaption>Textured model · 360°</figcaption>
+              <video width="720" height="720" controls controlslist="nodownload" muted loop playsinline preload="none" poster="assets/visual-models/0026/model.jpg" aria-label="360-degree model preview of the sage holder">
+                <source src="assets/visual-models/0026/model.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+        </article>
+        <article class="asset-example" id="example-0024" aria-labelledby="example-0024-heading">
+          <h3 id="example-0024-heading">Emergency-stop box</h3>
+          <div class="example-media">
+            <figure><figcaption>Input video</figcaption>
+              <video width="720" height="1280" controls controlslist="nodownload" muted loop playsinline preload="none" poster="assets/visual-models/0024/input.jpg" aria-label="Source video of the emergency-stop box">
+                <source src="assets/visual-models/0024/input.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure><figcaption>Textured model · 360°</figcaption>
+              <video width="720" height="720" controls controlslist="nodownload" muted loop playsinline preload="none" poster="assets/visual-models/0024/model.jpg" aria-label="360-degree model preview of the emergency-stop box">
+                <source src="assets/visual-models/0024/model.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+        </article>
+        <article class="asset-example" id="example-0028" aria-labelledby="example-0028-heading">
+          <h3 id="example-0028-heading">Bamboo organizer</h3>
+          <div class="example-media">
+            <figure><figcaption>Input video</figcaption>
+              <video width="720" height="1280" controls controlslist="nodownload" muted loop playsinline preload="none" poster="assets/visual-models/0028/input.jpg" aria-label="Source video of the bamboo organizer">
+                <source src="assets/visual-models/0028/input.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure><figcaption>Textured model · 360°</figcaption>
+              <video width="720" height="720" controls controlslist="nodownload" muted loop playsinline preload="none" poster="assets/visual-models/0028/model.jpg" aria-label="360-degree model preview of the bamboo organizer">
+                <source src="assets/visual-models/0028/model.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+        </article>
+        <article class="asset-example" id="example-0029" aria-labelledby="example-0029-heading">
+          <h3 id="example-0029-heading">Bamboo tray</h3>
+          <div class="example-media">
+            <figure><figcaption>Input video</figcaption>
+              <video width="720" height="1280" controls controlslist="nodownload" muted loop playsinline preload="none" poster="assets/visual-models/0029/input.jpg" aria-label="Source video of the bamboo tray">
+                <source src="assets/visual-models/0029/input.mp4" type="video/mp4">
+              </video>
+            </figure>
+            <figure><figcaption>Textured model · 360°</figcaption>
+              <video width="720" height="720" controls controlslist="nodownload" muted loop playsinline preload="none" poster="assets/visual-models/0029/model.jpg" aria-label="360-degree model preview of the bamboo tray">
+                <source src="assets/visual-models/0029/model.mp4" type="video/mp4">
+              </video>
+            </figure>
+          </div>
+        </article>
+      </div>
+    </section>
     <section id="results" class="content-section" aria-labelledby="results-heading">
-      <div class="section-heading"><span class="section-number" aria-hidden="true">02</span><div><p class="eyebrow">Data Generation</p><h2 id="results-heading">From learned behavior to useful robot data.</h2></div></div>
+      <div class="section-heading"><span class="section-number" aria-hidden="true">03</span><div><p class="eyebrow">Data Generation</p><h2 id="results-heading">From learned behavior to useful robot data.</h2></div></div>
       <p class="section-lead">Evaluated on nine multistage manipulation tasks, with downstream visual-policy learning and zero-shot deployment on Franka and Kinova robots.</p>
       <div class="metrics">
         <article><h3>Simulation policy success</h3><p class="metric-value">82.03<span>%</span></p><p class="metric-description">Task-macro success of the primary privileged controller across nine tasks.</p></article>
@@ -158,6 +230,7 @@
       affiliations: ['University of California, Los Angeles', 'Carnegie Mellon University', 'Amazon', 'Robotics and AI Institute'],
       authorNotes: ['* Equal contribution · † Corresponding author', '‡ This work does not relate to the author’s position at Amazon.'],
       resources: {arxiv: null, code: null},
+      assetExamples: ['0026', '0024', '0028', '0029'],
       bibtex: `@misc{wang2026sun,
   title = {{SUN}: Agentic Robot Policy Learning with Persistent Task Programs},
   author = {Wang, Weiqi and Li, Zhi and Lei, Yudong and Martinez, David and
@@ -265,7 +338,39 @@
       }, {threshold: 0.35});
       observer.observe(video);
     }
-    motionPreference.addEventListener('change', event => { if (event.matches) video.pause(); });
+    // Pair the supplied source clips with renders of their actual textured models.
+    // Without JavaScript, every pair remains visible and playable.
+    const exampleSection = document.getElementById('asset-examples');
+    const exampleButtons = Array.from(document.querySelectorAll('[data-example]'));
+    const examplePanels = site.assetExamples.map(id => document.getElementById('example-' + id));
+    let activeExample = site.assetExamples[0];
+    let examplesVisible = false;
+    const pauseExamples = () => examplePanels.forEach(panel => panel.querySelectorAll('video').forEach(clip => clip.pause()));
+    const playActiveExample = () => {
+      if (!examplesVisible || motionPreference.matches) return;
+      document.getElementById('example-' + activeExample).querySelectorAll('video').forEach(clip => clip.play().catch(() => {}));
+    };
+    const selectExample = id => {
+      pauseExamples();
+      activeExample = id;
+      examplePanels.forEach(panel => { panel.hidden = panel.id !== 'example-' + id; });
+      exampleButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.example === id)));
+      playActiveExample();
+    };
+    exampleButtons.forEach(button => button.addEventListener('click', () => selectExample(button.dataset.example)));
+    selectExample(activeExample);
+    document.querySelector('.example-picker').hidden = false;
+    if ('IntersectionObserver' in window) {
+      const exampleObserver = new IntersectionObserver(entries => {
+        examplesVisible = entries.some(entry => entry.isIntersecting);
+        if (examplesVisible) playActiveExample();
+        else pauseExamples();
+      }, {threshold: 0.2});
+      exampleObserver.observe(exampleSection);
+    }
+    motionPreference.addEventListener('change', event => {
+      if (event.matches) { video.pause(); pauseExamples(); }
+    });
     if ('IntersectionObserver' in window) {
       const links = Array.from(document.querySelectorAll('nav a[href^="#"]'));
       const observer = new IntersectionObserver(entries => {
