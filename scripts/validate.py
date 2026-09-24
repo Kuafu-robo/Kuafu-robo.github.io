@@ -6,6 +6,7 @@ from collections import Counter
 from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
+import hashlib
 import json
 import re
 import sys
@@ -105,7 +106,7 @@ def main():
     approved_videos = [VIDEO, *EXAMPLE_VIDEOS]
     if len(page.videos) != len(approved_videos):
         errors.append("Expected the full project video and four video/model pairs.")
-    if Counter(attrs.get("src") for attrs in page.sources) != Counter(approved_videos):
+    if Counter(attrs.get("src", "").split("?")[0] for attrs in page.sources) != Counter(approved_videos):
         errors.append("Video sources do not match the approved project and object clips.")
     for attrs in page.videos:
         if "nodownload" not in attrs.get("controlslist", "").split():
@@ -123,10 +124,24 @@ def main():
 
     for stale in ["MPC screening", "SkillMimic", "Skill Mimic", "Anonymous Authors",
                   "Under Review", "REPLACE-ME", "canonical L42", "45.97%", "34.72%",
-                  "SUNified", "GPT-6", "control-to-learning-to-real policies",
+                  "SUNified", "control-to-learning-to-real policies",
                   "readiness", "Appendix IV", "controller preparation"]:
         if stale.casefold() in html.casefold():
             errors.append(f"Stale terminology or metadata in page: {stale}")
+    examples_section = re.search(r'<section id="asset-examples"[\s\S]*?</section>', html)
+    if not examples_section or "GPT-6 Astra" not in examples_section.group():
+        errors.append("The reconstruction examples must credit GPT-6 Astra.")
+    provenance_path = ROOT / "assets/visual-models/manifest.json"
+    if provenance_path.is_file():
+        provenance = json.loads(provenance_path.read_text(encoding="utf-8"))
+        for example in provenance["examples"]:
+            for name, record in example["files"].items():
+                path = ROOT / "assets/visual-models" / example["id"] / name
+                if path.is_file():
+                    with path.open("rb") as stream:
+                        actual = hashlib.file_digest(stream, "sha256").hexdigest()
+                    if actual != record["sha256"] or path.stat().st_size != record["bytes"]:
+                        errors.append(f"Object-example provenance mismatch: {path.relative_to(ROOT)}")
     if f"<title>{TITLE}</title>" not in html:
         errors.append("Page title does not match the current manuscript.")
     manifest = json.loads((ROOT / "site.webmanifest").read_text(encoding="utf-8"))
