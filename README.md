@@ -65,7 +65,7 @@ Official instructions: [Creating a Pages site](https://docs.github.com/en/pages/
 - **assets/figures/**: original current-paper figures; PNGs for in-page display, with vector PDFs retained as unlinked source assets.
 - **scripts/validate.py**: dependency-free file, link, terminology, and citation checks.
 
-Code is marked **Code coming soon**, with no invented link. When a public repository exists, set `site.resources.code` to its real URL. No public arXiv identifier was supplied, so the arXiv label is inactive. Set `site.resources.arxiv` only to the real `https://arxiv.org/abs/...` landing page when available. Never substitute a direct PDF link. The citation uses a preprint BibTeX entry without an invented ID.
+The **GitHub** button points to the author-supplied `https://github.com/Rayckey/SUNified` repository, which the author asked to link while it is still private. Both arXiv links point to `https://arxiv.org/abs/2608.31167`. All three links work without JavaScript. Keep the static URLs synchronized with `site.resources`; never substitute a direct PDF link for the arXiv abstract page. The citation uses a preprint BibTeX entry.
 
 Do not add any download links or controls. Figures enlarge on the page, citations can be copied, and the video hides the native download control where supported. This removes download affordances; it is not access control over publicly served assets.
 

@@ -22,7 +22,7 @@
       <a class="wordmark" href="#main" aria-label="SUN project home">SUN<span> / Kuafu</span></a>
       <nav aria-label="Main navigation">
         <a href="#video">Video</a><a href="#method">Method</a><a href="#results">Results</a>
-        <span class="nav-resource" data-resource="arxiv" aria-disabled="true" title="Public arXiv page link pending">arXiv</span>
+        <a class="nav-resource" data-resource="arxiv" href="https://arxiv.org/abs/2608.31167">arXiv</a>
       </nav>
     </div>
   </header>
@@ -38,9 +38,9 @@
       </div>
       <p class="author-notes" id="author-notes">* Equal contribution · † Corresponding author<br>‡ This work does not relate to the author’s position at Amazon.</p>
       <div class="resource-links">
-        <span class="button" data-resource="arxiv" aria-disabled="true" title="Public arXiv page link pending">arXiv</span>
+        <a class="button" data-resource="arxiv" href="https://arxiv.org/abs/2608.31167">arXiv</a>
         <a class="button" href="#video">Video</a>
-        <a class="button" href="#citation">BibTeX</a><span class="release-note" id="code-status">Code coming soon</span>
+        <a class="button" href="#citation">BibTeX</a><a class="button" id="code-status" href="https://github.com/Rayckey/SUNified">GitHub</a>
       </div>
       <figure class="hero-figure" id="overview">
         <button type="button" class="figure-link" data-image="assets/figures/chase_sun.png?v=20260923-author" data-lightbox disabled aria-label="Enlarge Figure 1: SUN and Kuafu overview" data-caption="Figure 1. Coordinated by a persistent SUN Program, the Kuafu harness equips the agent with physics-based verification, policy learning, and data-production capabilities. The program supervises the simulation controller and its demonstrations; downstream visual policies learn from recorded observations and actions alone. We evaluate nine tasks and transfer visual policies for six of them to Franka FR3 and Kinova Gen3 robots.">
@@ -216,7 +216,7 @@
   </dialog>
   <script>
     'use strict';
-    // Publication data follows the identified arXiv manuscript; no public identifier is assumed.
+    // Publication data follows the current manuscript and the author-supplied arXiv URL.
     const site = {
       title: 'SUN: Agentic Robot Policy Learning with Persistent Task Programs',
       publication: 'Research preprint · 2026',
@@ -229,7 +229,7 @@
       ],
       affiliations: ['University of California, Los Angeles', 'Carnegie Mellon University', 'Amazon', 'Robotics and AI Institute'],
       authorNotes: ['* Equal contribution · † Corresponding author', '‡ This work does not relate to the author’s position at Amazon.'],
-      resources: {arxiv: null, code: null},
+      resources: {arxiv: 'https://arxiv.org/abs/2608.31167', code: 'https://github.com/Rayckey/SUNified'},
       assetExamples: ['0026', '0024', '0028', '0029'],
       bibtex: `@misc{wang2026sun,
   title = {{SUN}: Agentic Robot Policy Learning with Persistent Task Programs},
@@ -266,20 +266,12 @@
       notes.append(document.createTextNode(note));
     });
     if (site.resources.arxiv && site.resources.arxiv.startsWith('https://arxiv.org/abs/')) {
-      document.querySelectorAll('[data-resource="arxiv"]').forEach(label => {
-        const link = document.createElement('a');
-        link.className = label.className;
-        link.textContent = label.textContent;
+      document.querySelectorAll('[data-resource="arxiv"]').forEach(link => {
         link.href = site.resources.arxiv;
-        label.replaceWith(link);
       });
     }
     if (site.resources.code) {
-      const link = document.createElement('a');
-      link.href = site.resources.code;
-      link.className = 'button';
-      link.textContent = 'Source code ↗';
-      document.getElementById('code-status').replaceWith(link);
+      document.getElementById('code-status').href = site.resources.code;
     }
     document.getElementById('bibtex').textContent = site.bibtex;
     // Figures stay on the page; buttons add enlargement without exposing file links.

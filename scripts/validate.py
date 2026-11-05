@@ -122,11 +122,13 @@ def main():
     except ValueError:
         errors.append("A required method, object-example, or results section is missing.")
 
+    # The author-supplied repository name is valid; SUNified remains stale in page copy.
+    terminology_html = html.replace("https://github.com/Rayckey/SUNified", "")
     for stale in ["MPC screening", "SkillMimic", "Skill Mimic", "Anonymous Authors",
                   "Under Review", "REPLACE-ME", "canonical L42", "45.97%", "34.72%",
                   "SUNified", "control-to-learning-to-real policies",
                   "readiness", "Appendix IV", "controller preparation"]:
-        if stale.casefold() in html.casefold():
+        if stale.casefold() in terminology_html.casefold():
             errors.append(f"Stale terminology or metadata in page: {stale}")
     examples_section = re.search(r'<section id="asset-examples"[\s\S]*?</section>', html)
     if not examples_section or "GPT-6 Astra" not in examples_section.group():
